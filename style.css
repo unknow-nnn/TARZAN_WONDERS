@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -13,19 +13,26 @@
 
 :root {
     --main-color: #d90429;
-    --text-color: #020102;
-    --bg-color: #fff;
+    --text-color: #ffffff;
+    --bg-color: #0a0a0a;
+    --secondary-color: #2b2d42;
+    --light-color: #111111;
+    --gray-color: #aaaaaa;
+    --card-bg: #151515;
+    --header-bg: rgba(15, 15, 15, 0.95);
 }
 
 body {
     color: var(--text-color);
     background: var(--bg-color);
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1068px;
     margin: auto;
     width: 100%;
+    padding: 0 15px;
 }
 
 header {
@@ -33,9 +40,9 @@ header {
     width: 100%;
     top: 0;
     left: 0;
-    background: var(--bg-color);
+    background: var(--header-bg);
     z-index: 100;
-    box-shadow: 0 1px 4px hsl(0 4% 15% / 10%);
+    box-shadow: 0 1px 4px rgba(255, 255, 255, 0.05);
 }
 
 .nav {
@@ -88,6 +95,70 @@ header {
     font-size: 24px;
     cursor: pointer;
     display: none;
+    color: var(--text-color);
+}
+
+/* Floating Images */
+.floating-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.float-img {
+    position: absolute;
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    opacity: 0.5;
+    transition: transform 2s ease-in-out;
+}
+
+.float-1 {
+    top: 15%;
+    left: 5%;
+    transform: rotate(-5deg);
+    animation: float 8s ease-in-out infinite;
+}
+
+.float-2 {
+    top: 25%;
+    right: 5%;
+    transform: rotate(5deg);
+    animation: float 7s ease-in-out infinite 1s;
+}
+
+.float-3 {
+    bottom: 15%;
+    left: 10%;
+    transform: rotate(3deg);
+    animation: float 9s ease-in-out infinite 2s;
+}
+
+.float-4 {
+    bottom: 25%;
+    right: 10%;
+    transform: rotate(-3deg);
+    animation: float 10s ease-in-out infinite 3s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0);
+    }
 }
 
 .home {
@@ -97,18 +168,40 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .home-text {
     text-align: center;
     color: #fff;
     max-width: 800px;
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
 }
 
 .home-text h1 {
     font-size: 3.5rem;
     font-weight: bold;
     text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.home-text p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .home-text span {
@@ -119,35 +212,412 @@ header {
     color: cyan;
 }
 
+.home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Floating Car Specs */
+.floating-specs {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: -50px;
+    position: relative;
+    z-index: 2;
+}
+
+.spec-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 150px;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.spec-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.spec-card i {
+    font-size: 2rem;
+    color: var(--main-color);
+    margin-bottom: 10px;
+}
+
+.spec-card h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.spec-card p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--main-color);
+}
+
 .btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     background: var(--main-color);
     color: #fff;
     border-radius: 5px;
     font-weight: 600;
     transition: 0.3s ease;
+    border: 2px solid var(--main-color);
 }
 
 .btn:hover {
     background: #a60320;
+    border-color: #a60320;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #fff;
+}
+
+.btn-outline:hover {
+    background: var(--main-color);
 }
 
 .heading {
     text-align: center;
     padding: 50px 20px 20px;
-    background-color: #f4f4f4;
 }
 
-.heading h1 {
+.heading h2 {
     font-size: 2.5rem;
     margin-bottom: 10px;
+    color: var(--text-color);
 }
 
 .heading p {
     font-size: 1rem;
-    color: #555;
+    color: var(--gray-color);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Features Section */
+.features {
+    padding: 60px 0;
+    background-color: var(--light-color);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feature-box {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.feature-box i {
+    font-size: 3rem;
+    color: var(--main-color);
+    margin-bottom: 20px;
+}
+
+.feature-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.feature-box p {
+    color: var(--gray-color);
+}
+
+/* Floating Brand Logos */
+.floating-brands {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    gap: 20px;
+}
+
+.brand-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    opacity: 0.7;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+}
+
+.brand-logo:hover {
+    opacity: 1;
+    filter: brightness(1) invert(0);
+    transform: scale(1.1);
+}
+
+/* Popular Models Section */
+.popular {
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-color);
+}
+
+.popular-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.popular-box {
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.popular-box:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.popular-box img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.popular-box h3 {
+    padding: 15px 15px 5px;
+    font-size: 1.2rem;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.stars {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.stars i {
+    color: gold;
+    font-size: 1.2rem;
+}
+
+.popular-box .btn {
+    display: block;
+    width: 80%;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+/* Floating Car Shape */
+.car-shape {
+    position: absolute;
+    bottom: -100px;
+    right: -150px;
+    z-index: 1;
+    opacity: 0.05;
+    transform: rotate(-15deg);
+}
+
+.shape-img {
+    width: 600px;
+    filter: brightness(0) invert(1);
+}
+
+/* Newsletter Section */
+.newsletter {
+    padding: 60px 0;
+    background: var(--secondary-color);
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+    opacity: 0.1;
+}
+
+.newsletter h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.newsletter p {
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.newsletter form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+
+.newsletter input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.newsletter button {
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: #000;
+    color: #fff;
+    padding: 60px 0 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/brushed-alum-dark.png');
+    opacity: 0.05;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.footer-logo p {
+    margin-top: 15px;
+    color: #aaa;
+}
+
+.footer-links h3, .footer-social h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-links h3::after, .footer-social h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 50px;
+    height: 2px;
+    background: var(--main-color);
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: var(--main-color);
+    padding-left: 5px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #111;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: var(--main-color);
+    transform: translateY(-5px);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #111;
+    color: #aaa;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+/* Cars Model Page Styles */
+.cars {
+    padding-top: 100px;
+    background-color: var(--bg-color);
 }
 
 .cars-container {
@@ -158,15 +628,17 @@ header {
 }
 
 .cars-container .box {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .cars-container .box:hover {
     transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .cars-container .box img {
@@ -179,13 +651,15 @@ header {
     padding: 10px;
     font-size: 1.1rem;
     text-align: center;
-    background-color: #f8f8f8;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
 }
 
+/* Contact Page Styles */
 .contact {
     padding: 50px 20px;
     text-align: center;
-    background: #f9f9f9;
+    background: var(--light-color);
 }
 
 .contact .main {
@@ -222,7 +696,7 @@ header {
 
 .contact-text p {
     font-size: 1rem;
-    color: #333;
+    color: var(--gray-color);
     margin: 15px 0;
 }
 
@@ -239,4 +713,107 @@ header {
 
 .contact-text button:hover {
     background: #a60320;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .home-text h1 {
+        font-size: 2.5rem;
+    }
+    
+    .heading h2 {
+        font-size: 2rem;
+    }
+    
+    .float-img {
+        width: 150px;
+        height: 90px;
+    }
+    
+    .floating-specs {
+        flex-wrap: wrap;
+    }
+    
+    .shape-img {
+        width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+    
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--header-bg);
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.5rem;
+        padding: 20px;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: 0.5s ease;
+    }
+    
+    .navbar.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    
+    .home-text h1 {
+        font-size: 2rem;
+    }
+    
+    .home-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .features-container, 
+    .popular-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    .float-img {
+        display: none;
+    }
+    
+    .car-shape {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .heading h2 {
+        font-size: 1.5rem;
+    }
+    
+    .newsletter form {
+        flex-direction: column;
+    }
+    
+    .newsletter input, 
+    .newsletter button {
+        width: 100%;
+    }
+    
+    .spec-card {
+        width: 100%;
+    }
+    
+    .brand-logo {
+        width: 60px;
+        height: 60px;
+    }
 }
